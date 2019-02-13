@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('form') form: NgForm;
+  public userEmail = '';
+  public userPassword = '';
 
   constructor(
     private auth: AuthService,
@@ -20,4 +25,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  public onSubmit() {
+    this.auth.logIn(this.userEmail, this.userPassword);
+    if (this.auth.isAuth()) {
+      this.router.navigate(['/users']);
+    }
+    this.form.resetForm();
+  }
 }
