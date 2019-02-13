@@ -21,7 +21,7 @@
                 <input [(ngModel)]='user.email' type="email" name="email" class="form-control mb-1" id="email" #email="ngModel" placeholder="Enter your email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
                 <p-message severity="error" text="Correct email is required" *ngIf="!email.valid"></p-message>
               </div>
-              <button [disabled]='form.invalid' type="submit" class="btn btn-primary px-4">Edit</button>
+              <button [disabled]='form.invalid || form.pristine' type="submit" class="btn btn-primary px-4">Edit</button>
             </fieldset> 
           </form>
       </div>      
